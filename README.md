@@ -1,8 +1,8 @@
-# ElementDiff
-
-[![Version](https://img.shields.io/cocoapods/v/ElementDiff.svg?style=flat)](http://cocoapods.org/pods/ElementDiff)
+<img src="https://cloud.githubusercontent.com/assets/75655/11761766/ec67aedc-a0cf-11e5-9a9f-b069cc57f555.png" width="180" alt="ElementDiff"> [![Version](https://img.shields.io/cocoapods/v/ElementDiff.svg?style=flat)](http://cocoapods.org/pods/ElementDiff)
 [![License](https://img.shields.io/cocoapods/l/ElementDiff.svg?style=flat)](http://cocoapods.org/pods/ElementDiff)
 [![Platform](https://img.shields.io/cocoapods/p/ElementDiff.svg?style=flat)](http://cocoapods.org/pods/ElementDiff)
+
+<hr>
 
 Compute differences between two sequences of elements.
 
