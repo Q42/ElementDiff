@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name              = "ElementDiff"
-  s.version           = "0.1.0"
+  s.version           = "0.2.0"
   s.summary           = "Animate tableview for view model arrays"
 
   s.description       = <<-DESC
