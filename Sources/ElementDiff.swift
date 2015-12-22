@@ -91,6 +91,31 @@ extension SequenceType where Generator.Element : Hashable {
   }
 }
 
+extension SequenceType {
+
+  /// Compute differences between two sequences of elements using a custom identifier.
+  /// These can be passed to `updateSection` extensions to animate transitions.
+  ///
+  /// Example:
+  /// ```swift
+  /// // Update self.items array of view models
+  /// let previous: [ViewModel] = self.items
+  /// self.items = model.currentViewModels()
+  /// let diff = previous.diff(self.items)
+  ///
+  /// // Animate changes to view models array
+  /// self.tableView.beginUpdates()
+  /// self.tableView.updateSection(0, diff: diff)
+  /// self.tableView.endUpdates()
+  /// ```
+  public func diff<H : Hashable>(updated: Self, identifierSelector: Generator.Element -> H) -> ElementDiff {
+    let selfIdentifiers = self.map(identifierSelector)
+    let updatedIdentifiers = updated.map(identifierSelector)
+
+    return selfIdentifiers.diff(updatedIdentifiers)
+  }
+}
+
 extension UICollectionView {
 
   /// Update UICollectionView items based on `ElementDiff`
