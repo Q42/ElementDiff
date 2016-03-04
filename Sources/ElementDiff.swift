@@ -10,10 +10,10 @@ import UIKit
 /// Differences between two sequences of elements, computed by `SequenceType.diff`
 /// Can be passed to `UITableView.updateSection` or `UICollectionView.updateSection`.
 public struct ElementDiff {
-  public let deleted: [Int]
-  public let inserted: [Int]
-  public let moved: [Int:Int]
-  public let unmoved: [Int]
+  public var deleted: [Int]
+  public var inserted: [Int]
+  public var moved: [Int:Int]
+  public var unmoved: [Int]
 }
 
 extension SequenceType where Generator.Element : Hashable {
