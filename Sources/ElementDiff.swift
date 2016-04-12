@@ -14,6 +14,13 @@ public struct ElementDiff {
   public var inserted: [Int]
   public var moved: [Int:Int]
   public var unmoved: [Int]
+
+  public init(deleted: [Int] = [], inserted: [Int] = [], moved: [Int:Int] = [:], unmoved: [Int] = []) {
+    self.deleted = deleted
+    self.inserted = inserted
+    self.moved = moved
+    self.unmoved = unmoved
+  }
 }
 
 extension SequenceType where Generator.Element : Hashable {
