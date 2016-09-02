@@ -34,6 +34,7 @@ pod "ElementDiff"
 Releases
 --------
 
+ - **0.3.0** - 2016-09-03 - Remove `reloadRowsAtIndexPaths`
  - 0.2.1 - 2016-03-04 - Make ElementDiff struct fields vars
  - **0.2.0** - 2015-12-22 - Allow for using custom identifier
  - **0.1.0** - 2015-12-12 - Initial public release
