@@ -138,9 +138,6 @@ extension UICollectionView {
       let toIndexPath = NSIndexPath(forItem: toIx, inSection: section)
       self.moveItemAtIndexPath(fromIndexPath, toIndexPath: toIndexPath)
     }
-
-    let reloadedIndexPaths = diff.unmoved.map { NSIndexPath(forItem: $0, inSection: section) }
-    self.reloadItemsAtIndexPaths(reloadedIndexPaths)
   }
 }
 
@@ -154,8 +151,7 @@ extension UITableView {
     diff: ElementDiff,
     withRowAnimation defaultRowAnimation: UITableViewRowAnimation = UITableViewRowAnimation.Automatic,
     deleteRowAnimation: UITableViewRowAnimation? = nil,
-    insertRowAnimation: UITableViewRowAnimation? = nil,
-    reloadRowAnimation: UITableViewRowAnimation? = nil)
+    insertRowAnimation: UITableViewRowAnimation? = nil)
   {
     let deletedIndexPaths = diff.deleted.map { NSIndexPath(forItem: $0, inSection: section) }
     self.deleteRowsAtIndexPaths(deletedIndexPaths, withRowAnimation: deleteRowAnimation ?? defaultRowAnimation)
@@ -168,8 +164,5 @@ extension UITableView {
       let toIndexPath = NSIndexPath(forItem: toIx, inSection: section)
       self.moveRowAtIndexPath(fromIndexPath, toIndexPath: toIndexPath)
     }
-
-    let reloadedIndexPaths = diff.unmoved.map { NSIndexPath(forItem: $0, inSection: section) }
-    self.reloadRowsAtIndexPaths(reloadedIndexPaths, withRowAnimation: reloadRowAnimation ?? defaultRowAnimation)
   }
 }
