@@ -22,6 +22,9 @@ self.tableView.updateSection(0, diff: diff)
 self.tableView.endUpdates()
 ```
 
+![Example](https://cloud.githubusercontent.com/assets/75655/20943974/f6c3956e-bc01-11e6-8514-7718d2997f67.gif)
+
+
 ## Installation
 
 ElementDiff is available through [CocoaPods](http://cocoapods.org). To install
@@ -34,6 +37,7 @@ pod "ElementDiff"
 Releases
 --------
 
+ - **0.4.0** - 2016-12-06 - Swift 3 support
  - **0.3.0** - 2016-09-03 - Remove `reloadRowsAtIndexPaths`
  - 0.2.1 - 2016-03-04 - Make ElementDiff struct fields vars
  - **0.2.0** - 2015-12-22 - Allow for using custom identifier
