@@ -1,0 +1,16 @@
+PODS:
+  - ElementDiff (0.3.0)
+
+DEPENDENCIES:
+  - ElementDiff (from `../`)
+
+EXTERNAL SOURCES:
+  ElementDiff:
+    :path: ../
+
+SPEC CHECKSUMS:
+  ElementDiff: 6604fc13366853b307d710279e7618f0daba72a1
+
+PODFILE CHECKSUM: 9a38154e1cc2d8d5b420cbdd695df21c1862c5a9
+
+COCOAPODS: 1.1.1
