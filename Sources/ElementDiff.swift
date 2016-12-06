@@ -23,8 +23,8 @@ public struct ElementDiff {
   }
 }
 
-extension SequenceType where Generator.Element : Hashable {
-  typealias T = Generator.Element
+extension Sequence where Iterator.Element : Hashable {
+  typealias T = Iterator.Element
 
   /// Compute differences between two sequences of elements.
   /// These can be passed to `updateSection` extensions to animate transitions.
@@ -41,22 +41,22 @@ extension SequenceType where Generator.Element : Hashable {
   /// self.tableView.updateSection(0, diff: diff)
   /// self.tableView.endUpdates()
   /// ```
-  public func diff(updated: Self) -> ElementDiff {
+  public func diff(_ updated: Self) -> ElementDiff {
     let original = self
 
     var originalIndex = [T:Int]()
-    for (ix, obj) in original.enumerate() {
+    for (ix, obj) in original.enumerated() {
       originalIndex[obj] = ix
     }
 
     var updatedIndex = [T:Int]()
-    for (ix, obj) in updated.enumerate() {
+    for (ix, obj) in updated.enumerated() {
       updatedIndex[obj] = ix
     }
 
     var deleted: [Int] = []
     var deletedSet = Set<Int>()
-    for (ix, orig) in original.enumerate() {
+    for (ix, orig) in original.enumerated() {
       if updatedIndex[orig] != nil {
         continue
       }
@@ -66,7 +66,7 @@ extension SequenceType where Generator.Element : Hashable {
     }
 
     var inserted: [Int] = []
-    for (ix, new) in updated.enumerate() {
+    for (ix, new) in updated.enumerated() {
       if originalIndex[new] != nil {
         continue
       }
@@ -78,7 +78,7 @@ extension SequenceType where Generator.Element : Hashable {
     var movedSet = Set<Int>()
 
     var unmoved: [Int] = []
-    for (previousIx, orig) in original.enumerate() {
+    for (previousIx, orig) in original.enumerated() {
       if deletedSet.contains(previousIx) {
         continue
       }
@@ -98,7 +98,7 @@ extension SequenceType where Generator.Element : Hashable {
   }
 }
 
-extension SequenceType {
+extension Sequence {
 
   /// Compute differences between two sequences of elements using a custom identifier.
   /// These can be passed to `updateSection` extensions to animate transitions.
@@ -115,7 +115,7 @@ extension SequenceType {
   /// self.tableView.updateSection(0, diff: diff)
   /// self.tableView.endUpdates()
   /// ```
-  public func diff<H : Hashable>(updated: Self, identifierSelector: Generator.Element -> H) -> ElementDiff {
+  public func diff<H : Hashable>(_ updated: Self, identifierSelector: (Iterator.Element) -> H) -> ElementDiff {
     let selfIdentifiers = self.map(identifierSelector)
     let updatedIdentifiers = updated.map(identifierSelector)
 
@@ -126,17 +126,17 @@ extension SequenceType {
 extension UICollectionView {
 
   /// Update UICollectionView items based on `ElementDiff`
-  public func updateSection(section: Int, diff: ElementDiff) {
-    let deletedIndexPaths = diff.deleted.map { NSIndexPath(forItem: $0, inSection: section) }
-    self.deleteItemsAtIndexPaths(deletedIndexPaths)
+  public func updateSection(_ section: Int, diff: ElementDiff) {
+    let deletedIndexPaths = diff.deleted.map { IndexPath(item: $0, section: section) }
+    self.deleteItems(at: deletedIndexPaths)
 
-    let insertedIndexPaths = diff.inserted.map { NSIndexPath(forItem: $0, inSection: section) }
-    self.insertItemsAtIndexPaths(insertedIndexPaths)
+    let insertedIndexPaths = diff.inserted.map { IndexPath(item: $0, section: section) }
+    self.insertItems(at: insertedIndexPaths)
 
     for (fromIx, toIx) in diff.moved {
-      let fromIndexPath = NSIndexPath(forItem: fromIx, inSection: section)
-      let toIndexPath = NSIndexPath(forItem: toIx, inSection: section)
-      self.moveItemAtIndexPath(fromIndexPath, toIndexPath: toIndexPath)
+      let fromIndexPath = IndexPath(item: fromIx, section: section)
+      let toIndexPath = IndexPath(item: toIx, section: section)
+      self.moveItem(at: fromIndexPath, to: toIndexPath)
     }
   }
 }
@@ -147,22 +147,22 @@ extension UITableView {
   ///
   /// Call `beginUpdates` before, and `endUpdates` after.
   public func updateSection(
-    section: Int,
+    _ section: Int,
     diff: ElementDiff,
-    withRowAnimation defaultRowAnimation: UITableViewRowAnimation = UITableViewRowAnimation.Automatic,
+    withRowAnimation defaultRowAnimation: UITableViewRowAnimation = .automatic,
     deleteRowAnimation: UITableViewRowAnimation? = nil,
     insertRowAnimation: UITableViewRowAnimation? = nil)
   {
-    let deletedIndexPaths = diff.deleted.map { NSIndexPath(forItem: $0, inSection: section) }
-    self.deleteRowsAtIndexPaths(deletedIndexPaths, withRowAnimation: deleteRowAnimation ?? defaultRowAnimation)
+    let deletedIndexPaths = diff.deleted.map { IndexPath(item: $0, section: section) }
+    self.deleteRows(at: deletedIndexPaths, with: deleteRowAnimation ?? defaultRowAnimation)
 
-    let insertedIndexPaths = diff.inserted.map { NSIndexPath(forItem: $0, inSection: section) }
-    self.insertRowsAtIndexPaths(insertedIndexPaths, withRowAnimation: insertRowAnimation ?? defaultRowAnimation)
+    let insertedIndexPaths = diff.inserted.map { IndexPath(item: $0, section: section) }
+    self.insertRows(at: insertedIndexPaths, with: insertRowAnimation ?? defaultRowAnimation)
 
     for (fromIx, toIx) in diff.moved {
-      let fromIndexPath = NSIndexPath(forItem: fromIx, inSection: section)
-      let toIndexPath = NSIndexPath(forItem: toIx, inSection: section)
-      self.moveRowAtIndexPath(fromIndexPath, toIndexPath: toIndexPath)
+      let fromIndexPath = IndexPath(item: fromIx, section: section)
+      let toIndexPath = IndexPath(item: toIx, section: section)
+      self.moveRow(at: fromIndexPath, to: toIndexPath)
     }
   }
 }
