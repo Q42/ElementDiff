@@ -126,7 +126,7 @@ extension Sequence {
 extension UICollectionView {
 
   /// Update UICollectionView items based on `ElementDiff`
-  public func update(section: Int, diff: ElementDiff) {
+  public func updateSection(_ section: Int, diff: ElementDiff) {
     let deletedIndexPaths = diff.deleted.map { IndexPath(item: $0, section: section) }
     self.deleteItems(at: deletedIndexPaths)
 
@@ -146,8 +146,8 @@ extension UITableView {
   /// Update UITableView items based on `ElementDiff`.
   ///
   /// Call `beginUpdates` before, and `endUpdates` after.
-  public func update(
-    section: Int,
+  public func updateSection(
+    _ section: Int,
     diff: ElementDiff,
     withRowAnimation defaultRowAnimation: UITableViewRowAnimation = .automatic,
     deleteRowAnimation: UITableViewRowAnimation? = nil,
