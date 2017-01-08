@@ -21,6 +21,10 @@ public struct ElementDiff {
     self.moved = moved
     self.unmoved = unmoved
   }
+
+  public var noChanges: Bool {
+    return deleted.isEmpty && inserted.isEmpty && moved.isEmpty
+  }
 }
 
 extension Sequence where Iterator.Element : Hashable {
