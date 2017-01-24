@@ -12,7 +12,8 @@ Pod::Spec.new do |s|
   s.social_media_url  = "https://twitter.com/tomlokhorst"
   s.homepage          = "https://github.com/Q42/ElementDiff"
 
-  s.platform          = :ios, '8.0'
+  s.ios.deployment_target = '8.0'
+  s.watchos.deployment_target = '2.0'
 
   s.source            = { :git => "https://github.com/Q42/ElementDiff.git", :tag => s.version.to_s }
   s.requires_arc      = true

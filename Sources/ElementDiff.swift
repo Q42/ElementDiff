@@ -127,6 +127,9 @@ extension Sequence {
   }
 }
 
+
+#if !os(watchOS)
+
 extension UICollectionView {
 
   /// Update UICollectionView items based on `ElementDiff`
@@ -170,3 +173,5 @@ extension UITableView {
     }
   }
 }
+
+#endif
