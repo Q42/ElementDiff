@@ -107,6 +107,8 @@ extension Sequence {
   /// Compute differences between two sequences of elements using a custom identifier.
   /// These can be passed to `updateSection` extensions to animate transitions.
   ///
+  /// Identifiers *must be* unique
+  ///
   /// Example:
   /// ```swift
   /// // Update self.items array of view models
@@ -122,6 +124,13 @@ extension Sequence {
   public func diff<H : Hashable>(_ updated: Self, identifierSelector: (Iterator.Element) -> H) -> ElementDiff {
     let selfIdentifiers = self.map(identifierSelector)
     let updatedIdentifiers = updated.map(identifierSelector)
+
+    if Set(selfIdentifiers).count != Array(self).count {
+      assertionFailure("[ElementDiff] self contains multiple items with same identifier: \(selfIdentifiers)")
+    }
+    if Set(updatedIdentifiers).count != Array(updated).count {
+      assertionFailure("[ElementDiff] updated contains multiple items with same identifier: \(updatedIdentifiers)")
+    }
 
     return selfIdentifiers.diff(updatedIdentifiers)
   }
