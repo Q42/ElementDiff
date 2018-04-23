@@ -102,12 +102,16 @@ extension Sequence where Iterator.Element : Hashable {
   }
 }
 
+struct NonUniqueIdentifiers: LocalizedError {
+  var errorDescription: String
+}
+
 extension Sequence {
 
   /// Compute differences between two sequences of elements using a custom identifier.
   /// These can be passed to `updateSection` extensions to animate transitions.
   ///
-  /// Identifiers *must be* unique
+  /// Identifiers *must be* unique, or function will throw
   ///
   /// Example:
   /// ```swift
@@ -121,15 +125,15 @@ extension Sequence {
   /// self.tableView.updateSection(0, diff: diff)
   /// self.tableView.endUpdates()
   /// ```
-  public func diff<H : Hashable>(_ updated: Self, identifierSelector: (Iterator.Element) -> H) -> ElementDiff {
+  public func diff<H : Hashable>(_ updated: Self, identifierSelector: (Iterator.Element) -> H) throws -> ElementDiff {
     let selfIdentifiers = self.map(identifierSelector)
     let updatedIdentifiers = updated.map(identifierSelector)
 
     if Set(selfIdentifiers).count != Array(self).count {
-      assertionFailure("[ElementDiff] self contains multiple items with same identifier: \(selfIdentifiers)")
+      throw NonUniqueIdentifiers(errorDescription: "self contains multiple items with same identifier: \(selfIdentifiers)")
     }
     if Set(updatedIdentifiers).count != Array(updated).count {
-      assertionFailure("[ElementDiff] updated contains multiple items with same identifier: \(updatedIdentifiers)")
+      throw NonUniqueIdentifiers(errorDescription: "updated contains multiple items with same identifier: \(updatedIdentifiers)")
     }
 
     return selfIdentifiers.diff(updatedIdentifiers)

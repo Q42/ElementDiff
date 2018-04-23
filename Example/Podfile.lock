@@ -1,5 +1,5 @@
 PODS:
-  - ElementDiff (0.3.0)
+  - ElementDiff (0.5.0)
 
 DEPENDENCIES:
   - ElementDiff (from `../`)
@@ -9,8 +9,8 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  ElementDiff: 6604fc13366853b307d710279e7618f0daba72a1
+  ElementDiff: 69f72adb05eec4d1eda7fccdc0221b87a78419ca
 
 PODFILE CHECKSUM: 9a38154e1cc2d8d5b420cbdd695df21c1862c5a9
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.4.0

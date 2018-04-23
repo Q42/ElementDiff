@@ -14,11 +14,17 @@ class ViewController: UITableViewController {
 
   var items: [(String, UIColor)] = [] {
     didSet {
-      let diff = oldValue.diff(items, identifierSelector: { $0.0 })
+      do {
+        let diff = try oldValue.diff(items, identifierSelector: { $0.0 })
 
-      tableView.beginUpdates()
-      tableView.updateSection(0, diff: diff)
-      tableView.endUpdates()
+        tableView.beginUpdates()
+        tableView.updateSection(0, diff: diff)
+        tableView.endUpdates()
+      }
+      catch {
+        print("[ElementDiff] \(error.localizedDescription)")
+        tableView.reloadData()
+      }
     }
   }
 
