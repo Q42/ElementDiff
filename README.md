@@ -37,6 +37,7 @@ pod "ElementDiff"
 Releases
 --------
 
+ - 0.6.0 - 2018-04-23 - Throw error for non-unique ids
  - 0.5.0 - 2017-06-23 - Add `fatalError` for non-unique ids
  - 0.4.0 - 2016-12-06 - Swift 3 support
  - 0.3.0 - 2016-09-03 - Remove `reloadRowsAtIndexPaths`
