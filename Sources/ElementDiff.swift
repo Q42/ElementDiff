@@ -166,9 +166,9 @@ extension UITableView {
   public func updateSection(
     _ section: Int,
     diff: ElementDiff,
-    withRowAnimation defaultRowAnimation: UITableViewRowAnimation = .automatic,
-    deleteRowAnimation: UITableViewRowAnimation? = nil,
-    insertRowAnimation: UITableViewRowAnimation? = nil)
+    withRowAnimation defaultRowAnimation: UITableView.RowAnimation = .automatic,
+    deleteRowAnimation: UITableView.RowAnimation? = nil,
+    insertRowAnimation: UITableView.RowAnimation? = nil)
   {
     let deletedIndexPaths = diff.deleted.map { IndexPath(item: $0, section: section) }
     self.deleteRows(at: deletedIndexPaths, with: deleteRowAnimation ?? defaultRowAnimation)
