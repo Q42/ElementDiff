@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "ElementDiff",
+        "repositoryURL": "https://github.com/Q42/ElementDiff.git",
+        "state": {
+          "branch": null,
+          "revision": "9e8eb54ae0edb2c0d13a866f6c0a14fbe1aca150",
+          "version": "0.8.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
