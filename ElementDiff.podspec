@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name              = "ElementDiff"
-  s.version           = "0.7.0"
+  s.version           = "0.8.0"
   s.summary           = "Animate tableview for view model arrays"
 
   s.description       = <<-DESC
@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = '8.0'
   s.tvos.deployment_target = '9.0'
-  s.swift_version     = '4.2'
+  s.swift_version     = '5.1'
 
   s.source            = { :git => "https://github.com/Q42/ElementDiff.git", :tag => s.version.to_s }
   s.requires_arc      = true

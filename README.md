@@ -37,6 +37,7 @@ pod "ElementDiff"
 Releases
 --------
 
+ - 0.8.0 - 2019-06-10 - Swift 5.1 support in podspec
  - 0.7.0 - 2018-10-02 - Swift 4.2 support
  - 0.6.0 - 2018-04-23 - Throw error for non-unique ids
  - 0.5.0 - 2017-06-23 - Add `fatalError` for non-unique ids
